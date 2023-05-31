@@ -13,18 +13,32 @@ class TrackListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.rowHeight = 80
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        trackList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "track", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        let track = trackList[indexPath.row]
+        content.text = track.song
+        content.secondaryText = track.artist
+        content.image = UIImage(named: track.title)
+        content.imageProperties.cornerRadius = tableView.rowHeight / 2
+        cell.contentConfiguration = content
+        return cell
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailsVC = segue.destination as? TrackDetailsViewController
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        detailsVC?.track = trackList[indexPath.row]
+    }
+    
+    // MARK: - UITableViewDelegate
 }

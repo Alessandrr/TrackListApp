@@ -18,7 +18,7 @@ struct Track {
     
     static func getTrackList() -> [Track] {
         [
-            Track(artist: "Alberto Ruiz", song: "7 Elements (Original Mix)")
+            Track(artist: "Alberto Ruiz", song: "7 Elements (Original Mix)"),
             Track(artist: "Dave Wincent", song: "Red Eye (Original Mix)")
         ]
     }
